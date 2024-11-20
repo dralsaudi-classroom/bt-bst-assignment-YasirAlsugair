@@ -154,8 +154,35 @@ public class BST<T> {
 		return p;
 	}
 	public int countNodesIn(int k) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		if(root==null)
+			return 0;
+		boolean found=false;
+		BSTNode<T> runner=root;
+		while(!found) {
+			if(runner.key==k)
+				found=true;
+			else if(runner.key<k)
+				runner=runner.right;
+			else
+				runner=runner.left;
+			if(runner==null)
+				return 0;
+		}
+		return traverseWithcount(runner);
+		
 		// Write the member method countNodesIn member of the class BST that returns the number of nodes in the subtree rooted at
 		// the node with key k. Assume that k exists. You are not allowed to call any of the BST methods.
+	}
+	public int traverseWithcount(BSTNode<T> nd) {
+		int i=0;
+		if(nd.left==null && nd.right==null)
+			return ++i;
+		if(nd.left!=null){
+			i+=traverseWithcount(nd.left);
+		}
+		if(nd.right!=null) {
+			i+=traverseWithcount(nd.right);
+	}
+		return ++i;
 	}
 }
